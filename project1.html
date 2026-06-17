@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern Website Maker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin: 0;
+      letter-spacing: 1.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: #f9f9f9;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffe600;
+    }
+
+    .mobile-menu-button {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #f9f9f9;
+      font-size: 1.5rem;
+    }
+
+    main {
+      flex: 1;
+      padding: 4rem 2rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero {
+      margin-bottom: 3rem;
+    }
+
+    .hero h2 {
+      font-size: 2.75rem;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+
+    .btn {
+      background: #ffe600;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.75rem 2rem;
+      border-radius: 35px;
+      box-shadow: 0 5px 15px rgba(255, 230, 0, 0.5);
+      transition: background-color 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #ffd800;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 2rem;
+      flex: 1 1 250px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .feature h3 {
+      margin-top: 0;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 64px;
+        right: 0;
+        width: 220px;
+        border-radius: 0 0 0 12px;
+        box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      .mobile-menu-button {
+        display: block;
+      }
+
+      header {
+        position: relative;
+      }
+
+      main {
+        padding: 4rem 1rem 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>SiteMaker</h1>
+    <button class="mobile-menu-button" aria-label="Toggle navigation">&#9776;</button>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h2>Build Stunning Websites Effortlessly</h2>
+      <p>Craft beautiful, modern, and responsive websites with ease. Perfect for portfolios, businesses, or personal
+        projects.</p>
+      <a href="#features" class="btn">Explore Features</a>
+    </section>
+    <section id="features" class="features">
+      <article class="feature">
+        <h3>Responsive Design</h3>
+        <p>Your website will look amazing on all devices — from phones to desktops.</p>
+      </article>
+      <article class="feature">
+        <h3>Customizable</h3>
+        <p>Easy to personalize fonts, colors, and layout to match your style and brand.</p>
+      </article>
+      <article class="feature">
+        <h3>Fast & Lightweight</h3>
+        <p>Optimized for speed and performance so your visitors get the best experience.</p>
+      </article>
+    </section>
+    <section id="about" style="margin-top:3rem;">
+      <h2>About SiteMaker</h2>
+      <p>
+        SiteMaker is a simple template to help you quickly launch your online presence.
+        It’s built with modern web standards, clean design principles, and flexible structure.
+      </p>
+    </section>
+    <section id="contact" style="margin-top:3rem;">
+      <h2>Get In Touch</h2>
+      <p>Email us at <a href="mailto:hello@sitemaker.example"
+          style="color: #ffe600; text-decoration: underline;">hello@sitemaker.example</a></p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 SiteMaker. All rights reserved.
+  </footer>
+  <script>
+    const menuBtn = document.querySelector('.mobile-menu-button');
+    const nav = document.querySelector('nav');
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetID = this.getAttribute('href').slice(1);
+        const targetSection = document.getElementById(targetID);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+          if (window.innerWidth <= 720) {
+            nav.classList.remove('show');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

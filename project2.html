@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login & Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 350px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        .form-container {
+            display: flex;
+            width: 700px;
+            transition: transform 0.5s ease;
+        }
+        .form {
+            width: 350px;
+            padding: 32px 24px;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #005fa3;
+        }
+        .toggle-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: #0078d7;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        /* new styles for country select and OTP boxes */
+        .country-row { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+        .country-select { width:100px; padding:10px; border:1px solid #ccc; border-radius:4px; background:#fff; }
+        .mobile-input { flex:1; }
+        .otp-container { display:flex; gap:8px; margin-bottom:8px; }
+        .otp-digit {
+            width:48px;
+            height:48px;
+            padding:6px;
+            font-size:20px;
+            text-align:center;
+            border:1px solid #ccc;
+            border-radius:6px;
+        }
+        .otp-actions { display:flex; gap:6px; margin-bottom:6px; }
+
+		/* error styles */
+		.input-error { border-color: #e53935 !important; box-shadow: 0 0 0 3px rgba(229,57,53,0.06); }
+		.btn-error { border: 1px solid #e53935 !important; background: #fff5f5 !important; color: #b71c1c !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container" id="formContainer">
+            <!-- Login Form -->
+            <form class="form" id="loginForm">
+                <h2>Login</h2>
+                <!-- added ids for JS -->
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <div id="loginMessage" style="height:18px;margin-bottom:8px;font-size:14px;"></div>
+                <button type="submit">Login</button>
+                <span class="toggle-link" onclick="showRegister()">Don't have an account? Register</span>
+            </form>
+
+            <!-- Registration Form -->
+            <form class="form" id="registerForm">
+                <h2>Register</h2>
+                <input type="text" id="regUsername" placeholder="Username" required>
+                <input type="email" id="regEmail" placeholder="Email" required>
+
+                <!-- country + mobile row -->
+                <div class="country-row">
+                    <select id="regCountry" class="country-select" title="Country code">
+						<!-- full list of country calling codes (common set) -->
+						<option value="+1">+1 (US/CA)</option>
+						<option value="+7">+7 (RU/KZ)</option>
+						<option value="+20">+20 (EG)</option>
+						<option value="+27">+27 (ZA)</option>
+						<option value="+30">+30 (GR)</option>
+						<option value="+31">+31 (NL)</option>
+						<option value="+32">+32 (BE)</option>
+						<option value="+33">+33 (FR)</option>
+						<option value="+34">+34 (ES)</option>
+						<option value="+36">+36 (HU)</option>
+						<option value="+39">+39 (IT)</option>
+						<option value="+40">+40 (RO)</option>
+						<option value="+44">+44 (UK)</option>
+						<option value="+49">+49 (DE)</option>
+						<option value="+52">+52 (MX)</option>
+						<option value="+54">+54 (AR)</option>
+						<option value="+55">+55 (BR)</option>
+						<option value="+61">+61 (AU)</option>
+						<option value="+62">+62 (ID)</option>
+						<option value="+63">+63 (PH)</option>
+						<option value="+64">+64 (NZ)</option>
+						<option value="+65">+65 (SG)</option>
+						<option value="+66">+66 (TH)</option>
+						<option value="+81">+81 (JP)</option>
+						<option value="+82">+82 (KR)</option>
+						<option value="+84">+84 (VN)</option>
+						<option value="+86">+86 (CN)</option>
+						<option value="+91" selected>+91 (IN)</option>
+						<option value="+92">+92 (PK)</option>
+						<option value="+93">+93 (AF)</option>
+						<option value="+94">+94 (LK)</option>
+						<option value="+95">+95 (MM)</option>
+						<option value="+98">+98 (IR)</option>
+						<option value="+211">+211 (SS)</option>
+						<option value="+212">+212 (MA)</option>
+						<option value="+213">+213 (DZ)</option>
+						<option value="+216">+216 (TN)</option>
+						<option value="+218">+218 (LY)</option>
+						<option value="+220">+220 (GM)</option>
+						<option value="+221">+221 (SN)</option>
+						<option value="+222">+222 (MR)</option>
+						<option value="+223">+223 (ML)</option>
+						<option value="+234">+234 (NG)</option>
+						<option value="+255">+255 (TZ)</option>
+						<option value="+256">+256 (UG)</option>
+						<option value="+258">+258 (MZ)</option>
+						<option value="+260">+260 (ZM)</option>
+						<option value="+263">+263 (ZW)</option>
+						<!-- add other codes as needed -->
+                    </select>
+                    <input type="tel" id="regMobile" class="mobile-input" placeholder="Mobile (10 digits)" required maxlength="10" inputmode="numeric" pattern="\d{10}">
+                </div>
+
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <!-- added clear password rule hint -->
+                <div id="passwordHint" style="font-size:13px;color:#555;margin-top:-8px;margin-bottom:8px;">
+                    Password must be alphanumeric (letters and numbers only), minimum 6 characters, and include at least one letter and one number.
+                </div>
+                <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+                <div id="passMessage" style="height:18px;margin-bottom:8px;font-size:14px;"></div>
+
+                <!-- OTP verification area (hidden until registration triggers it) -->
+                <div id="otpSection" style="display:none;margin-bottom:8px;">
+                    <div style="font-size:14px;margin-bottom:6px;">Enter the 4-digit OTP sent to your email & mobile:</div>
+                    <div class="otp-container">
+                        <input type="text" id="otp1" class="otp-digit" maxlength="1" inputmode="numeric" />
+                        <input type="text" id="otp2" class="otp-digit" maxlength="1" inputmode="numeric" />
+                        <input type="text" id="otp3" class="otp-digit" maxlength="1" inputmode="numeric" />
+                        <input type="text" id="otp4" class="otp-digit" maxlength="1" inputmode="numeric" />
+                    </div>
+                    <div id="otpMessage" style="height:18px;font-size:14px;margin-bottom:6px;"></div>
+					<!-- display masked send info -->
+					<div id="otpSentInfo" style="font-size:13px;margin-bottom:6px;color:#333"></div>
+                    <div class="otp-actions">
+                        <button type="button" id="verifyOtpBtn">Confirm OTP</button>
+                        <button type="button" id="resendOtpBtn">Resend OTP</button>
+                    </div>
+                </div>
+
+                <button type="submit" id="registerBtn">Register</button>
+                <span class="toggle-link" onclick="showLogin()">Already have an account? Login</span>
+            </form>
+        </div>
+
+        <!-- added status area for success message -->
+        <div id="statusMessages" style="width:350px;margin-top:12px;"></div>
+    </div>
+    <script>
+        // ...existing UI functions...
+        const formContainer = document.getElementById('formContainer');
+        function showRegister() { formContainer.style.transform = 'translateX(-350px)'; }
+        function showLogin() { formContainer.style.transform = 'translateX(0)'; }
+
+        // Elements (updated)
+        const registerForm = document.getElementById('registerForm');
+        const regUsername = document.getElementById('regUsername');
+        const regEmail = document.getElementById('regEmail');
+        const regCountry = document.getElementById('regCountry');
+        const regMobile = document.getElementById('regMobile');
+        const regPassword = document.getElementById('regPassword');
+        const regConfirm = document.getElementById('regConfirmPassword');
+        const passMessage = document.getElementById('passMessage');
+        const registerButton = document.getElementById('registerBtn');
+
+        const otpSection = document.getElementById('otpSection');
+        const otpInputs = [
+            document.getElementById('otp1'),
+            document.getElementById('otp2'),
+            document.getElementById('otp3'),
+            document.getElementById('otp4')
+        ];
+        const otpMessage = document.getElementById('otpMessage');
+        const otpSentInfo = document.getElementById('otpSentInfo');
+        const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+        const resendOtpBtn = document.getElementById('resendOtpBtn');
+
+        const statusMessages = document.getElementById('statusMessages');
+
+        // Login elements unchanged
+        const loginForm = document.getElementById('loginForm');
+        const loginUsername = document.getElementById('loginUsername');
+        const loginPassword = document.getElementById('loginPassword');
+        const loginMessage = document.getElementById('loginMessage');
+
+        // LocalStorage helpers
+        function getUsers() { try { return JSON.parse(localStorage.getItem('users') || '[]'); } catch { return []; } }
+        function saveUsers(users) { localStorage.setItem('users', JSON.stringify(users)); }
+        function findUser(username) {
+            const users = getUsers();
+            return users.find(u => u.username.toLowerCase() === username.toLowerCase());
+        }
+        function findByEmailOrMobile(email, mobile) {
+            const users = getUsers();
+            return users.find(u => u.email.toLowerCase() === email.toLowerCase() || u.mobile === mobile);
+        }
+
+        // Pending registration helpers
+        function savePending(pending) { localStorage.setItem('pendingUser', JSON.stringify(pending)); }
+        function getPending() { try { return JSON.parse(localStorage.getItem('pendingUser') || 'null'); } catch { return null; } }
+        function clearPending() { localStorage.removeItem('pendingUser'); }
+
+        // Countdown state
+        let countdownInterval = null;
+
+        // OTP utilities
+        function generateOtp() { return Math.floor(1000 + Math.random() * 9000).toString(); } // 4 digits
+
+        // add helper to mask email for display
+        function maskEmail(email) {
+            if (!email) return '';
+            const parts = email.split('@');
+            if (parts.length !== 2) return email;
+            const name = parts[0];
+            const domain = parts[1];
+            const visible = name.length <= 2 ? name : name.slice(0,2);
+            return visible + '***@' + domain;
+        }
+
+        // start OTP countdown and update otpMessage every second
+        function startOtpCountdown(expiresAt) {
+			// clear any previous interval
+			if (countdownInterval) clearInterval(countdownInterval);
+
+			const messageDiv = otpMessage;
+			const btnText = registerButton;
+
+			function update() {
+				const remaining = Math.ceil((expiresAt - Date.now()) / 1000);
+				if (remaining <= 0) {
+					clearInterval(countdownInterval);
+					countdownInterval = null;
+					messageDiv.innerHTML = '⌛ Verification code expired';
+					messageDiv.style.color = 'red';
+					// Invalidate OTP stored in pending
+					const pending = getPending();
+					if (pending) {
+						pending.otp = '';
+						savePending(pending);
+						// if resend limit reached, style resend button as error and disable
+						if ((pending.resendCount || 0) >= 5) {
+							resendOtpBtn.disabled = true;
+							setButtonError(resendOtpBtn, true);
+						}
+					}
+					// disable verify button and show error visual
+					verifyOtpBtn.disabled = true;
+					setButtonError(verifyOtpBtn, true);
+					if (btnText) btnText.textContent = 'Send Verification Code';
+				} else {
+					const mm = Math.floor(remaining / 60);
+					const ss = String(remaining % 60).padStart(2, '0');
+					messageDiv.innerHTML = `⌛ Code expires in ${mm}:${ss}`;
+					messageDiv.style.color = '#333';
+					// remove error visual while countdown running
+					setButtonError(verifyOtpBtn, false);
+				}
+			}
+
+			update();
+			countdownInterval = setInterval(update, 1000);
+		}
+
+		function clearOtpCountdown() {
+			if (countdownInterval) {
+				clearInterval(countdownInterval);
+				countdownInterval = null;
+			}
+		}
+
+        function sendOtpToUser(pending) {
+            const otp = pending.otp;
+            const emailBody = `Your OTP is ${otp}`;
+            const smsBody = `Your OTP is ${otp}`;
+
+            // open mail client (simulation)
+            const mailto = `mailto:${encodeURIComponent(pending.email)}?subject=${encodeURIComponent('Your OTP')}&body=${encodeURIComponent(emailBody)}`;
+            window.open(mailto);
+
+            // sms using full number including country code
+            const smsTo = pending.country + pending.mobile;
+            const smsLink = `sms:${encodeURIComponent(smsTo)}?body=${encodeURIComponent(smsBody)}`;
+            window.open(smsLink);
+
+            // UI feedback
+            if (otpSentInfo) {
+                const maskedEmail = maskEmail(pending.email);
+                const mobilePart = pending.mobile.length >= 6 ? pending.mobile.slice(0,3) + '****' + pending.mobile.slice(-3) : pending.mobile;
+                otpSentInfo.textContent = `OTP sent to ${maskedEmail} and ${pending.country} ${mobilePart}`;
+            }
+
+            // enable verify button and start countdown
+            verifyOtpBtn.disabled = false;
+			setButtonError(verifyOtpBtn, false);
+			// reset resend button visual (new OTP sent)
+			setButtonError(resendOtpBtn, false);
+            startOtpCountdown(pending.otpExpires);
+
+            // debug log
+            console.log(`DEBUG: OTP for ${pending.email} / ${smsTo} = ${otp}`);
+        }
+
+        function sendCredentials(user) {
+            const body = `Welcome ${user.username}!\nYour login credentials:\nUsername: ${user.username}\nPassword: ${user.password}\n\n(Keep this information secure.)`;
+            const mailto = `mailto:${encodeURIComponent(user.email)}?subject=${encodeURIComponent('Your account credentials')}&body=${encodeURIComponent(body)}`;
+            window.open(mailto);
+            const smsLink = `sms:${encodeURIComponent(user.mobileFull)}?body=${encodeURIComponent('Username: ' + user.username + ' Password: ' + user.password)}`;
+            window.open(smsLink);
+        }
+
+        // Prevent non-digits in mobile and limit to 10 digits
+        regMobile.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 10);
+        });
+
+        // centralized rule message used in UI
+        const PASSWORD_RULE_MESSAGE = 'Password must be alphanumeric (letters and numbers only), minimum 6 characters, and include at least one letter and one number.';
+
+        // add helper to require only letters and digits, min 6 chars, and at least one letter + one digit
+		function isAlphanumericPassword(p) {
+			if (!p) return false;
+			// only letters and digits, minimum length 6
+			if (!/^[A-Za-z0-9]{6,}$/.test(p)) return false;
+			// ensure at least one letter and one digit
+			return /[A-Za-z]/.test(p) && /\d/.test(p);
+		}
+
+        // Password validation for registration (use centralized message)
+        function validatePasswords() {
+            if (!regPassword.value && !regConfirm.value) {
+                passMessage.textContent = '';
+                registerButton.disabled = false;
+                registerButton.style.opacity = '';
+				// clear error visuals
+				setFieldError(regPassword, false);
+				setFieldError(regConfirm, false);
+                return;
+            }
+
+            if (!isAlphanumericPassword(regPassword.value)) {
+                passMessage.style.color = 'red';
+                passMessage.textContent = PASSWORD_RULE_MESSAGE;
+                registerButton.disabled = true;
+                registerButton.style.opacity = '0.6';
+				// show red outline on password fields
+				setFieldError(regPassword, true);
+				setFieldError(regConfirm, false);
+                return;
+            }
+
+            if (regPassword.value === regConfirm.value) {
+                passMessage.style.color = 'green';
+                passMessage.textContent = 'Passwords match';
+                registerButton.disabled = false;
+                registerButton.style.opacity = '1';
+				setFieldError(regPassword, false);
+				setFieldError(regConfirm, false);
+            } else {
+                passMessage.style.color = 'red';
+                passMessage.textContent = "Passwords don't match";
+                registerButton.disabled = true;
+                registerButton.style.opacity = '0.6';
+				// highlight both fields when mismatch
+				setFieldError(regPassword, true);
+				setFieldError(regConfirm, true);
+            }
+        }
+        regPassword.addEventListener('input', validatePasswords);
+        regConfirm.addEventListener('input', validatePasswords);
+
+		// sendOtpToUser: remove resend error styling when a new OTP is sent
+        function sendOtpToUser(pending) {
+            const otp = pending.otp;
+            const emailBody = `Your OTP is ${otp}`;
+            const smsBody = `Your OTP is ${otp}`;
+
+            // open mail client (simulation)
+            const mailto = `mailto:${encodeURIComponent(pending.email)}?subject=${encodeURIComponent('Your OTP')}&body=${encodeURIComponent(emailBody)}`;
+            window.open(mailto);
+
+            // sms using full number including country code
+            const smsTo = pending.country + pending.mobile;
+            const smsLink = `sms:${encodeURIComponent(smsTo)}?body=${encodeURIComponent(smsBody)}`;
+            window.open(smsLink);
+
+            // UI feedback
+            if (otpSentInfo) {
+                const maskedEmail = maskEmail(pending.email);
+                const mobilePart = pending.mobile.length >= 6 ? pending.mobile.slice(0,3) + '****' + pending.mobile.slice(-3) : pending.mobile;
+                otpSentInfo.textContent = `OTP sent to ${maskedEmail} and ${pending.country} ${mobilePart}`;
+            }
+
+            // enable verify button and start countdown
+            verifyOtpBtn.disabled = false;
+			setButtonError(verifyOtpBtn, false);
+			// reset resend button visual (new OTP sent)
+			setButtonError(resendOtpBtn, false);
+            startOtpCountdown(pending.otpExpires);
+
+            // debug log
+            console.log(`DEBUG: OTP for ${pending.email} / ${smsTo} = ${otp}`);
+        }
+
+		// startOtpCountdown: when expired mark verify button visually and ensure resend button state reflects resend limit
+		function startOtpCountdown(expiresAt) {
+			// clear any previous interval
+			if (countdownInterval) clearInterval(countdownInterval);
+
+			const messageDiv = otpMessage;
+			const btnText = registerButton;
+
+			function update() {
+				const remaining = Math.ceil((expiresAt - Date.now()) / 1000);
+				if (remaining <= 0) {
+					clearInterval(countdownInterval);
+					countdownInterval = null;
+					messageDiv.innerHTML = '⌛ Verification code expired';
+					messageDiv.style.color = 'red';
+					// Invalidate OTP stored in pending
+					const pending = getPending();
+					if (pending) {
+						pending.otp = '';
+						savePending(pending);
+						// if resend limit reached, style resend button as error and disable
+						if ((pending.resendCount || 0) >= 5) {
+							resendOtpBtn.disabled = true;
+							setButtonError(resendOtpBtn, true);
+						}
+					}
+					// disable verify button and show error visual
+					verifyOtpBtn.disabled = true;
+					setButtonError(verifyOtpBtn, true);
+					if (btnText) btnText.textContent = 'Send Verification Code';
+				} else {
+					const mm = Math.floor(remaining / 60);
+					const ss = String(remaining % 60).padStart(2, '0');
+					messageDiv.innerHTML = `⌛ Code expires in ${mm}:${ss}`;
+					messageDiv.style.color = '#333';
+					// remove error visual while countdown running
+					setButtonError(verifyOtpBtn, false);
+				}
+			}
+
+			update();
+			countdownInterval = setInterval(update, 1000);
+		}
+
+        // Resend OTP with limit (also restarts countdown)
+        resendOtpBtn.addEventListener('click', function() {
+            const pending = getPending();
+            if (!pending) {
+                otpMessage.style.color = 'red';
+                otpMessage.textContent = 'No pending registration to resend.';
+                return;
+            }
+            if ((pending.resendCount || 0) >= 5) {
+                otpMessage.style.color = 'red';
+                otpMessage.textContent = 'Resend limit reached.';
+                // mark resend button visually and disable
+                resendOtpBtn.disabled = true;
+                setButtonError(resendOtpBtn, true);
+                return;
+            }
+            pending.otp = generateOtp();
+            pending.otpExpires = Date.now() + 5 * 60 * 1000;
+            pending.resendCount = (pending.resendCount || 0) + 1;
+            pending.tries = 0;
+            savePending(pending);
+            sendOtpToUser(pending);
+            otpMessage.style.color = 'black';
+            otpMessage.textContent = 'OTP resent. Check email/SMS.';
+            // clear inputs and focus
+            otpInputs.forEach(i => i.value = '');
+            otpInputs[0].focus();
+			// remove any resend error visual when a resend succeeds
+			setButtonError(resendOtpBtn, false);
+        });
+
+		// showSuccessMessage: render success box, reset UI
+        function showSuccessMessage() {
+            // adapted markup from snippet
+            statusMessages.innerHTML = `
+                <div style="padding:12px;background:#ecfdf5;border-radius:8px;">
+                    <div style="display:flex;align-items:center;color:#065f46;font-weight:600;">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5dfc060e-ce9f-41a5-a100-ad94639caad4.png" alt="OK" style="width:20px;height:20px;margin-right:8px;">
+                        <span>Verification successful!</span>
+                    </div>
+                    <p style="margin-top:8px;color:#065f46;">You can now proceed to your account.</p>
+                </div>
+            `;
+            // Reset form and UI
+            otpSection.style.display = 'none';
+            registerButton.textContent = 'Send Verification Code';
+            registerButton.disabled = false;
+            otpInputs.forEach(i => i.value = '');
+            // clear countdown if running
+            clearOtpCountdown();
+        }
+
+        // Handle login submit (unchanged behavior)
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            loginMessage.textContent = '';
+            const user = findUser(loginUsername.value.trim());
+            if (!user) {
+                loginMessage.style.color = 'red';
+                loginMessage.textContent = 'User not registered';
+                return;
+            }
+            if (user.password !== loginPassword.value) {
+                loginMessage.style.color = 'red';
+                loginMessage.textContent = 'Incorrect password';
+                return;
+            }
+            loginMessage.style.color = 'green';
+            loginMessage.textContent = 'Login successful';
+            setTimeout(() => {
+                alert('Login successful (demo).');
+                loginForm.reset();
+                loginMessage.textContent = '';
+            }, 300);
+        });
+
+		// helper to set/remove field error
+		function setFieldError(field, on) {
+			if (!field) return;
+			if (on) field.classList.add('input-error');
+			else field.classList.remove('input-error');
+		}
+
+		// helper to set/remove button error state
+		function setButtonError(btn, on) {
+			if (!btn) return;
+			if (on) btn.classList.add('btn-error');
+			else btn.classList.remove('btn-error');
+		}
+    </script>
+</body>
+</html>

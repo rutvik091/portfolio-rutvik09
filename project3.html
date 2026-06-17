@@ -1,0 +1,168 @@
+<html>
+<head>
+	<title>JavaScript Validation</title>
+<script>
+function val()
+{
+	var sname=document.f1.sname.value;
+ 	var spassword=document.f1.spassword.value;
+	var srpassword=document.f1.srpassword.value;
+	var smobile=document.f1.smobile.value;
+	var saddress=document.f1.saddress.value;
+	var scity=document.f1.scity.value;
+	
+	if(sname=="")
+	{
+		alert('Enter Name');
+		document.f1.sname.focus();
+		return false;
+	}
+	if(spassword=="")
+	{
+		alert('Enter Password');
+		document.f1.spassword.focus();
+		return false;
+	}
+	if(spassword!="")
+	{
+		if(spassword.length<7)
+		{
+			alert('Length of password should be atleast 7 characters');
+			document.f1.spassword.value="";
+			document.f1.spassword.focus();
+			return false;
+		}
+	}
+	if(srpassword=="")
+	{
+		alert('Retype Password');
+		document.f1.srpassword.value="";
+		document.f1.srpassword.focus();
+		return false;
+	}
+	if(spassword!="" && srpassword!="")
+	{
+		if(spassword!=srpassword)
+		{
+			alert('Password not match');
+			document.f1.srpassword.value="";
+			document.f1.srpassword.focus();
+			return false;
+		}
+	}
+	if(smobile=="")
+	{
+		alert("Enter Mobile Number");		
+		document.f1.smobile.focus();
+		document.f1.smobile.value="";
+		return false;
+	}
+	
+	if(smobile.length<10 || smobile.length>10)
+	{
+		alert('Mobile Number Should be 10 digit only...');
+		document.f1.smobile.value="";
+		document.f1.smobile.focus();
+		return false;
+	}
+	
+	if(document.f1.sst[0].checked==false && document.f1.sst[1].checked==false && document.f1.sst[2].checked==false)
+	{
+		alert('Select Stream');
+		return false;
+	}
+	
+	if(document.f1.sdancing.checked==false && document.f1.sswimming.checked==false && document.f1.sskatting.checked==false && document.f1.ssinging.checked==false)
+	{
+		alert('Select atleast one hobby');
+		return false;
+	}
+	if(saddress=="")
+	{
+		alert('Enter Address');
+		return false;
+	}
+	if(scity=="Select")
+	{
+		alert('Select City');
+		return false;
+	}
+	
+	
+}
+</script>
+</head>
+<body>
+<form name="f1" method="get">
+<font face="Comic Sans MS, Georgia">
+<table border="1" align="center">
+<caption>Student Form</caption>
+<tr>
+	<td>Enter Name
+	<td>:
+	<td><input type="text" name="sname">
+</tr>
+
+<tr>
+	<td>Enter Password
+	<td>:
+	<td><input type="password" name="spassword">
+</tr>
+
+<tr>
+	<td>Enter Retype Password
+	<td>:
+	<td><input type="password" name="srpassword">
+</tr>
+
+<tr>
+	<td>Enter Mobile
+	<td>:
+	<td><input type="text" name="smobile">
+</tr>
+
+<tr>
+	<td>Select Stream
+	<td>:
+	<td><input type="radio" name="sst" value="MCA">MCA
+	<input type="radio" name="sst" value="MSCIT">MSCIT
+	<input type="radio" name="sst" value="ENG">ENG
+</tr>
+
+<tr>
+	<td>Select Hobbies
+	<td>:
+	<td><input type="checkbox" name="sdancing" value="Dancing"> Dancing
+	<input type="checkbox" name="sswimming" value="Swimming">Swimming
+	<input type="checkbox" name="sskatting" value="Skatting">Skatting
+	<input type="checkbox" name="ssinging" value="Singing">Singing
+</tr>
+
+<tr>
+	<td>Address
+	<td>:
+	<td>
+	<textarea name="saddress" rows="5" cols="50"></textarea>
+
+</tr>
+
+<tr>
+	<td>City
+	<td>:
+	<td>
+	<select name="scity">
+	<option value="Select" selected>Select</option>
+	<option value="ANAND">ANAND</option>
+	<option value="BARODA">BARODA</option>
+	</select>
+</tr>
+
+<tr>
+	<td colspan="3">
+	<input type="button" name="Submit" value="Submit" onClick="val()">
+	<input type="reset" value="RESET" onFocus="sname.focus()">
+</tr>
+</table>
+</form>
+</body>
+</html>
